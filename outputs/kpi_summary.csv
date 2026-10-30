@@ -1,0 +1,9 @@
+Metric,Value
+Total Orders,600.0
+Delivered Orders,387.0
+Returned Orders,99.0
+Cancelled Orders,114.0
+Unique Customers,175.0
+Delivered Revenue INR,3607684.18
+Estimated Delivered Profit INR,421495.53
+Average Delivered Order Value INR,9322.18

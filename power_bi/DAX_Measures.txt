@@ -1,0 +1,13 @@
+-- Create these measures in Power BI after importing sales_data.csv.
+-- If the imported table has a different name, replace 'sales_data' with that table name.
+Total Orders = DISTINCTCOUNT(sales_data[Order_ID])
+Unique Customers = DISTINCTCOUNT(sales_data[Customer_ID])
+Delivered Orders = CALCULATE(DISTINCTCOUNT(sales_data[Order_ID]), sales_data[Order_Status] = "Delivered")
+Returned Orders = CALCULATE(DISTINCTCOUNT(sales_data[Order_ID]), sales_data[Order_Status] = "Returned")
+Cancelled Orders = CALCULATE(DISTINCTCOUNT(sales_data[Order_ID]), sales_data[Order_Status] = "Cancelled")
+Delivered Revenue = CALCULATE(SUM(sales_data[Revenue_INR]), sales_data[Order_Status] = "Delivered")
+Estimated Delivered Profit = CALCULATE(SUM(sales_data[Profit_INR]), sales_data[Order_Status] = "Delivered")
+Average Delivered Order Value = DIVIDE([Delivered Revenue], [Delivered Orders])
+Return Rate = DIVIDE([Returned Orders], [Total Orders], 0)
+Cancellation Rate = DIVIDE([Cancelled Orders], [Total Orders], 0)
+Delivered Units = CALCULATE(SUM(sales_data[Quantity]), sales_data[Order_Status] = "Delivered")
