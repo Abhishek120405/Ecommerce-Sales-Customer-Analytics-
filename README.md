@@ -1,109 +1,110 @@
 # E-Commerce Sales & Customer Analytics
 
-End-to-end Data Analyst portfolio project using Excel, SQL, Python, Jupyter Notebook, and Power BI resources.
+**End-to-end Data Analytics portfolio project** | Excel · SQL · Python · Interactive HTML · Jupyter · Power BI (DAX guide)
 
+An end-to-end practice project analyzing 600 synthetic e-commerce orders from 2025. It explores sales performance across products, categories, regions, sales channels, customers, order status and time.
 
-## Dashboard Preview
+> **Data transparency:** The dataset is synthetic practice data, not real company or customer data. Profit is an estimate based on assumed product margins; it is not audited company profit. All findings are demonstrations of analytical methods, not claims about a real business.
 
-**Start here:** Open the [Interactive Dashboard](Interactive_Dashboard.html) to use the filters. The dashboard supports Region, Category, Sales Channel, Order Status, Month, and Day of Week; the daily and weekday charts update with the selected filters.
+## Dashboard preview
 
-### Executive dashboard
-![E-Commerce dashboard overview](screenshots/01_dashboard_overview.png)
+![E-Commerce Sales & Customer Analytics Dashboard](dashboard.png)
 
-### Daily sales trend
-![Daily delivered revenue trend](screenshots/02_daily_sales_trend.png)
+### Open the interactive dashboard
 
-### Monday–Sunday sales comparison
-![Delivered revenue by weekday](screenshots/03_weekday_sales.png)
+- Open [`index.html`](index.html) in Chrome or Edge. The browser dashboard includes filters, KPI cards, charts and a detail table; it runs locally without an external API.
+- The same dashboard source is also available at [`Interactive_Dashboard.html`](Interactive_Dashboard.html).
 
-### Category performance
-![Revenue by category](screenshots/04_category_performance.png)
+### Excel dashboard
 
-### Regional performance
-![Revenue by region](screenshots/05_regional_performance.png)
+Open [`excel/Ecommerce_Sales_Analytics_Dashboard.xlsx`](excel/Ecommerce_Sales_Analytics_Dashboard.xlsx) in Microsoft Excel Desktop and select the **Dashboard** sheet.
 
-### Top 10 products
-![Top 10 products by delivered revenue](screenshots/06_top_products.png)
+The workbook contains:
+- 4 dropdown filters: Region, Category, Sales Channel and Month
+- 6 KPI cards: Total Orders, Delivered Revenue, Estimated Delivered Profit, Average Order Value, Return Rate and Cancellation Rate
+- 6 native Excel charts: monthly delivered revenue, category revenue share, delivered revenue by region, orders by weekday, top 5 products and order-status split
+- Supporting sheets: `Insights`, `Sales_Data`, `Calc` and `About`
 
+The workbook's dashboard is designed for desktop Excel. Spreadsheet rendering can vary in mobile preview apps and other spreadsheet programs.
 
-## Dataset and limitations
-This repository uses **synthetic practice data (600 orders, 2025)**. It is not real company/customer data. `Profit_INR` is estimated using assumed margins, not audited profit.
+## Verified dataset summary
 
-## Tools demonstrated
-- Excel: prepared KPI dashboard, charts, supporting analysis sheets.
-- Python: pandas, NumPy, data validation, aggregation, exploratory analysis, Matplotlib charts.
-- SQL: KPI queries, filtering, aggregation, CTE, subquery, window functions, data-quality checks.
-- Power BI: prepared DAX measures and report build guide.
-- Business analysis: regional, product, channel, monthly and customer analysis.
+| Metric | Value |
+|---|---:|
+| Total orders | 600 |
+| Delivered orders | 387 |
+| Returned orders | 99 |
+| Cancelled orders | 114 |
+| Delivered revenue | ₹36,07,684.18 |
+| Estimated delivered profit | ₹4,21,495.53 |
+| Unique customers | 175 |
+| Average delivered order value | ₹9,322.18 |
 
-## Repository map
-- `data/`: source CSV
-- `excel/`: prepared Excel dashboard
-- `python/`: runnable analysis script
-- `sql/`: PostgreSQL-compatible SQL queries
-- `notebooks/`: Jupyter notebook
-- `power_bi/`: DAX and dashboard guide
-- `outputs/`: pre-generated CSV summaries, charts and executive report
-- `docs/`: data dictionary
+Delivered revenue and estimated profit include delivered orders only. Return and cancellation rates use all orders as the denominator.
 
-## Run Python
-From the repository root:
+## Project structure
+
+```text
+.
+├── .github/workflows/       # Automated validation workflow
+├── dashboard.png            # Main Excel dashboard preview for GitHub
+├── data/sales_data.csv      # 600 synthetic practice orders
+├── docs/                    # Setup, audit, data dictionary, QA and report docs
+├── excel/                   # Final Excel dashboard workbook
+├── notebooks/               # Jupyter analysis notebook
+├── outputs/                 # KPI tables, analysis results and chart exports
+├── power_bi/                # DAX measures and Power BI build guide
+├── python/                  # Reproducible pandas analysis
+├── sql/                     # PostgreSQL and SQLite query scripts
+├── tests/                   # Project and SQL validation scripts
+├── index.html               # Interactive dashboard entry point
+├── Interactive_Dashboard.html
+├── Dashboard_Report.pdf
+├── requirements.txt
+└── LICENSE
+```
+
+## Run the project
+
+### Python analysis
+
 ```bash
-python -m pip install -r requirements.txt
+python -m venv .venv
+# Activate the environment, then:
+python -m pip install --upgrade pip
+pip install -r requirements.txt
 python python/ecommerce_analysis.py
 ```
-The analysis outputs are already included in `outputs/`; running the script regenerates them.
 
-## Run SQL
-Import `data/sales_data.csv` into PostgreSQL as `sales_data`, then execute `sql/ecommerce_sales_analysis.sql`. The file contains table definition guidance and 10 ready-made queries.
+### SQLite query validation
 
-## Power BI
-Import the CSV in Power BI Desktop, create measures from `power_bi/DAX_Measures.txt`, follow `power_bi/Dashboard_Guide.md`, then save the report as a `.pbix` file. A native PBIX is not included.
-
-## Before publishing
-Review the outputs and make sure you can explain the analysis. Do not present synthetic data or estimated profit as real company results.
-
-
-## Included visual deliverables
-- `excel/Ecommerce_Sales_Analytics_Dashboard.xlsx`: prepared Excel dashboard and analysis tabs.
-- `Interactive_Dashboard.html`: standalone interactive browser dashboard with daily revenue trend and day-of-week filter.
-- `screenshots/`: PNG visuals plus a LinkedIn post draft.
-- `outputs/*.png`: Python-generated charts.
-- `docs/Dashboard_Report.pdf`: static dashboard report.
-
-## Completion status
-Python analysis has been executed to generate the included CSV summaries, charts, and report. SQL queries are prepared but must be executed in a PostgreSQL database. Power BI DAX and build instructions are included, but a native `.pbix` report must be saved from Power BI Desktop.
-
-## Quality checks
-See [`docs/QA_Checklist.md`](docs/QA_Checklist.md) for the checks performed and the project limitations.
-
-## Run the project validation checks
-From the repository root:
 ```bash
-python -m pip install -r requirements.txt
-python tests/validate_project.py
+python tests/run_sqlite_validation.py
 ```
-The validation script checks the CSV structure and IDs, embedded dashboard data, required dashboard controls/charts, matching dashboard copies, Python execution, Excel workbook structure/charts, notebook JSON, and README image paths.
 
-## Publish the interactive dashboard with GitHub Pages
-1. Open the repository on GitHub and select **Settings**.
-2. Open **Pages** under **Code and automation**.
-3. Under **Build and deployment**, choose **Deploy from a branch**.
-4. Select branch **main** and folder **/(root)**, then save.
-5. Wait for the Pages deployment and open the URL GitHub displays. The repository includes a root `index.html` copy of the interactive dashboard, so the Pages homepage can open directly after deployment.
+### PostgreSQL
 
-The normal repository landing page still shows the file list and README. To feature the repository on your GitHub profile, pin it from **Customize your pins** on your profile page.
+Import `data/sales_data.csv` into a table named `sales_data`, then run [`sql/ecommerce_sales_analysis.sql`](sql/ecommerce_sales_analysis.sql) in PostgreSQL. The PostgreSQL script is included but has not been run against a live PostgreSQL server as part of this package build.
 
-## SQL execution status (expanded)
-- `sql/ecommerce_sales_analysis_sqlite.sql` is a SQLite-compatible companion containing the same 10 analysis queries.
-- Run `python tests/run_sqlite_validation.py` to load the included CSV into an in-memory SQLite database and execute all 10 queries. This companion has been executed successfully against the included 600-row dataset.
-- `sql/ecommerce_sales_analysis.sql` remains the PostgreSQL version. It is not represented as PostgreSQL-tested because a PostgreSQL server/client is not bundled in this environment.
+### Power BI Desktop
 
-## Notebook execution status
-The notebook was executed from a fresh Python kernel during package QA. To reproduce locally, install `requirements.txt` and run all cells in Jupyter.
+Import `data/sales_data.csv`, create the measures in [`power_bi/DAX_Measures.txt`](power_bi/DAX_Measures.txt), and follow [`power_bi/Dashboard_Guide.md`](power_bi/Dashboard_Guide.md). Save the finished report in Power BI Desktop. **A native `.pbix` file is not included.**
 
-## Power BI status
-The package includes the source CSV, DAX measures, and a build guide. A native `.pbix` file cannot be truthfully supplied without creating and validating it in Power BI Desktop. Follow the guide in `power_bi/` and save the report locally as `.pbix` after checking the measures and visuals.
+For detailed instructions, see [`docs/SETUP_GUIDE.md`](docs/SETUP_GUIDE.md).
 
-## Browser validation status
-The dashboard has structural/data checks and its embedded 600-row dataset matches the CSV. Browser-based visual interaction still needs a final check in your own Chrome/Edge installation; use the six filters and Reset Filters before publishing.
+## Validation
+
+Run:
+
+```bash
+python tests/validate_project.py
+python tests/run_sqlite_validation.py
+```
+
+The checks cover the CSV structure and row counts, HTML dashboard data, Excel workbook structure and charts, notebook JSON, required documentation and SQLite-compatible SQL queries. GitHub Actions runs these checks on pushes and pull requests.
+
+**Validation boundaries:** PostgreSQL execution against a live server and creation of a native Power BI `.pbix` remain separate steps. Check the dashboard in your own desktop Excel and browser after downloading the repository.
+
+## License
+
+Project code and documentation are released under the MIT License. The synthetic dataset is included for practice and demonstration.
