@@ -1,24 +1,26 @@
-# Project Package Audit
+# Final Project Audit Report
 
-## Checks performed for this package
+## Scope
+Checks were run against the files in this repository package. This report does not claim that every external application or browser environment has been tested.
 
-- Source CSV contains 600 synthetic practice orders with unique order IDs.
-- Order statuses reconcile to 387 Delivered, 99 Returned and 114 Cancelled.
-- Delivered revenue: ₹36,07,684.18.
-- Estimated delivered profit: ₹4,21,495.53 (assumption-based, not audited).
-- Excel workbook opens programmatically, contains the Dashboard, Insights, Sales_Data, Calc and About worksheets, 600 source rows, six native charts and four dropdown validations.
-- Excel dashboard default cached KPIs were checked against the source dataset.
-- Main dashboard preview is included as `dashboard.png`.
-- Interactive HTML dashboard and its source copy are included.
-- Python analysis, Jupyter notebook, SQL scripts, DAX measures, setup guide, data dictionary and report are included.
-- ZIP archive integrity and project validation scripts are checked during packaging.
+## Passed checks
+- CSV contains 600 rows and 600 unique order IDs; statuses reconcile to 387 Delivered, 99 Returned and 114 Cancelled.
+- Interactive HTML dashboard embeds valid JSON for all 600 rows and includes six filters, a reset control, chart canvases and a detail table.
+- Dashboard copies are synchronized.
+- Python analysis script executes and regenerates analysis outputs.
+- Excel workbook includes 13 worksheets, five charts on the main Dashboard sheet, two charts on the Charts sheet and six dropdown validations.
+- Notebook JSON is valid.
+- All 10 SQLite companion queries execute against the included dataset and the row-count reconciliation passes.
+- Eight ordered project image assets, including the Excel dashboard preview and interactive dashboard preview, are present in `images/`.
+- README image references and ZIP archive integrity are checked during packaging.
 
-## Not claimed as completed
-
-- PostgreSQL SQL was not executed against a live PostgreSQL server.
-- A native Power BI `.pbix` is not included. DAX measures and a build guide are supplied for creating it in Power BI Desktop.
-- GitHub upload and GitHub Pages configuration are not performed by packaging this ZIP.
-- Mobile preview rendering is not guaranteed to match desktop Microsoft Excel. Check the workbook in desktop Excel before final presentation.
+## Not included / not claimed complete
+- PostgreSQL SQL file is supplied but has not been executed against a live PostgreSQL server.
+- A native Power BI `.pbix` is not included. DAX measures and a build guide are supplied; create and save the report in Power BI Desktop.
+- GitHub repository upload/commit is not performed by this ZIP-generation process.
+- GitHub Pages publication is not enabled automatically; configure it in repository Settings if you want a hosted dashboard page.
+- Browser interactions and final appearance should still be checked in your own Chrome/Edge and Excel Desktop versions.
+- The dataset is synthetic practice data for 2025; profit is estimated using assumed margins.
 
 ## Reproduce checks
 
@@ -26,7 +28,3 @@
 python tests/validate_project.py
 python tests/run_sqlite_validation.py
 ```
-
-## Data limitations
-
-The dataset is synthetic practice data, not real company or customer data. Profit is estimated using assumed product margins.
